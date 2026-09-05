@@ -45,6 +45,20 @@ const jumpForce = -10;
 let isOnGround = true;
 const groundY = 300;
 
+const platforms = [
+    {x: 0, y: 380, width: 800, height: 70}, 
+    {x:150, y:290, width: 120, height: 15},
+    {x: 400, y: 220, width: 120, height: 15},
+    {x: 250, y: 150, width: 120, height:15},
+]
+
+function drawPlatforms(){
+    platforms.forEach(function(plat){
+        c.fillStyle = '#4a6741';
+        c.fillRect(plat.x, plat.y, plat.width, plat.height);
+    })
+}
+
 window.addEventListener('keydown', function(e){
     keys[e.key] = true;
 });
@@ -81,6 +95,8 @@ function gameLoop(){
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBackgroundColor();
+
+    drawPlatforms();
 
     updatePlayer();
 
