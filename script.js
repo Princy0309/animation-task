@@ -22,22 +22,39 @@ function drawBackgroundColor(){
     c.fillRect(0, 350, canvas.width, 100);
 }
 
-
+let cloudX1 = 150;
+let cloudX2 = 400;
+let cloudX3 = 750;
 
 function drawClouds(){
+
+    cloudX1 = cloudX1+0.2;
+    cloudX2 = cloudX2+0.2;
+    cloudX3 = cloudX3 +0.2;
+
+    if (cloudX1 > canvas.width + 50) cloudX1=-100;
+    if (cloudX2 > canvas.width + 50) cloudX2=-100;
+    if (cloudX3 > canvas.width + 50) cloudX3 = -100;
+
     c.fillStyle = 'rgba(255, 255, 255, 0.6)';
 
     c.beginPath();
-    c.arc(150, 80, 25, 0, Math.PI * 2);
-    c.arc(180, 75, 30, 0, Math.PI * 2);
-    c.arc(210, 80, 25, 0, Math.PI * 2);
+    c.arc(cloudX1, 80, 25, 0, Math.PI * 2);
+    c.arc(cloudX1+30, 75, 30, 0, Math.PI * 2);
+    c.arc(cloudX1+60, 80, 25, 0, Math.PI * 2);
     c.fill();
 
 
     c.beginPath();
-    c.arc(500, 50, 20, 0, Math.PI*2);
-    c.arc(525, 45, 28, 0, Math.PI * 2 );
-    c.arc(555, 50, 22, 0, Math.PI * 2);
+    c.arc(cloudX2, 50, 20, 0, Math.PI*2);
+    c.arc(cloudX2+25, 45, 28, 0, Math.PI * 2 );
+    c.arc(cloudX2+55, 50, 22, 0, Math.PI * 2);
+    c.fill();
+
+    c.beginPath();
+    c.arc(cloudX3, 50, 22, 0, Math.PI*2);
+    c.arc(cloudX3+25, 45, 28, 0, Math.PI*2);
+    c.arc(cloudX3+65, 50, 22, 0, Math.PI*2);
     c.fill();
 }
 
