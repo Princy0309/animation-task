@@ -23,6 +23,25 @@ function drawBackgroundColor(){
 
 
 
+function drawClouds(){
+    c.fillStyle = 'rgba(255, 255, 255, 0.6)';
+
+    c.beginPath();
+    c.arc(150, 80, 25, 0, Math.PI * 2);
+    c.arc(180, 75, 30, 0, Math.PI * 2);
+    c.arc(210, 80, 25, 0, Math.PI * 2);
+    c.fill();
+
+
+    c.beginPath();
+    c.arc(500, 50, 20, 0, Math.PI*2);
+    c.arc(525, 45, 28, 0, Math.PI * 2 );
+    c.arc(555, 50, 22, 0, Math.PI * 2);
+    c.fill();
+}
+
+
+
 const player = new Image();
 player.src = 'Images/player.png';
 
@@ -120,6 +139,8 @@ function gameLoop(){
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBackgroundColor();
+
+    drawClouds();
 
     drawPlatforms();
 
