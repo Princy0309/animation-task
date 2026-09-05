@@ -64,11 +64,18 @@ function gameLoop(){
 
     updatePlayer();
 
-    frameCounter++;
-    if(frameCounter>=frameDelay){
-        currentFrame=(currentFrame+1)%totalFrames;
-        frameCounter=0;
+    if(keys['ArrowRight'] || keys['ArrowLeft']){
+
+         frameCounter++;
+        if(frameCounter>=frameDelay){
+            currentFrame=(currentFrame+1)%totalFrames;
+            frameCounter=0;
+        }
+
+    }else{
+        currentFrame = 0;
     }
+
 
     c.drawImage(player, currentFrame*frame_width, 0, frame_width, frame_height, playerX, playerY, frame_width, frame_height);
     
