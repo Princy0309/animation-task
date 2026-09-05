@@ -29,9 +29,29 @@ player.src = 'Images/player.png';
 const frame_width = 64;
 const frame_height = 64;
 
-player.onload = function(){
+let currentFrame = 0;
+const totalFrames = 30;
+let frameCounter = 0;
+const frameDelay = 8;
+
+function gameLoop(){
+    c.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBackgroundColor();
-    c.drawImage(player, 0, 0, frame_width, frame_height, 100, 300, frame_width, frame_height);
 
+    frameCounter++;
+    if(frameCounter>=frameDelay){
+        currentFrame=(currentFrame+1)%totalFrames;
+        frameCounter=0;
+    }
+
+    c.drawImage(player, currentFrame*frame_width, 0, frame_width, frame_height, 100, 300, frame_width, frame_height);
+    
+
+    requestAnimationFrame(gameLoop);
+}
+
+player.onload = function(){
+
+  gameLoop();
 };
