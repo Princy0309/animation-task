@@ -21,4 +21,17 @@ function drawBackgroundColor(){
     c.fillRect(0, 350, canvas.width, 100);
 }
 
-drawBackgroundColor();
+
+
+const player = new Image();
+player.src = 'Images/player.png';
+
+const frame_width = 64;
+const frame_height = 64;
+
+player.onload = function(){
+
+    drawBackgroundColor();
+    c.drawImage(player, 0, 0, frame_width, frame_height, 100, 300, frame_width, frame_height);
+
+};
