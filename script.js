@@ -34,10 +34,35 @@ const totalFrames = 30;
 let frameCounter = 0;
 const frameDelay = 8;
 
+let playerX = 100;
+let playerY = 300;
+const playerSpeed = 3;
+const keys = [];
+
+window.addEventListener('keydown', function(e){
+    keys[e.key] = true;
+});
+
+window.addEventListener('keyup', function(e){
+    keys[e.key] = false;
+})
+
+function updatePlayer(){
+    if(keys['ArrowRight']){
+        playerX = playerX+ playerSpeed;
+    }
+
+    if(keys['ArrowLeft']){
+        playerX = playerX - playerSpeed;
+    }
+}
+
 function gameLoop(){
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBackgroundColor();
+
+    updatePlayer();
 
     frameCounter++;
     if(frameCounter>=frameDelay){
@@ -45,7 +70,7 @@ function gameLoop(){
         frameCounter=0;
     }
 
-    c.drawImage(player, currentFrame*frame_width, 0, frame_width, frame_height, 100, 300, frame_width, frame_height);
+    c.drawImage(player, currentFrame*frame_width, 0, frame_width, frame_height, playerX, playerY, frame_width, frame_height);
     
 
     requestAnimationFrame(gameLoop);
