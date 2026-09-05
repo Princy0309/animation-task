@@ -39,6 +39,12 @@ let playerY = 300;
 const playerSpeed = 3;
 const keys = [];
 
+let velocityY = 0;
+const gravity = 0.3;
+const jumpForce = -10;
+let isOnGround = true;
+const groundY = 300;
+
 window.addEventListener('keydown', function(e){
     keys[e.key] = true;
 });
@@ -54,6 +60,20 @@ function updatePlayer(){
 
     if(keys['ArrowLeft']){
         playerX = playerX - playerSpeed;
+    }
+
+    if(keys['ArrowUp'] && isOnGround){
+        velocityY = jumpForce;
+        isOnGround = false;
+    }
+
+    velocityY = velocityY +gravity;
+    playerY = playerY + velocityY;
+
+    if(playerY>=groundY){
+        playerY = groundY;
+        velocityY = 0;
+        isOnGround = true;
     }
 }
 
