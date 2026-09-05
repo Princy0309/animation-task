@@ -37,13 +37,13 @@ const frameDelay = 8;
 let playerX = 100;
 let playerY = 300;
 const playerSpeed = 3;
-const keys = [];
+const keys = {};
 
 let velocityY = 0;
 const gravity = 0.3;
 const jumpForce = -10;
 let isOnGround = true;
-const groundY = 300;
+const groundY = 316;
 
 const platforms = [
     {x: 0, y: 380, width: 800, height: 70}, 
@@ -83,6 +83,21 @@ function updatePlayer(){
 
     velocityY = velocityY +gravity;
     playerY = playerY + velocityY;
+    isOnGround=false;
+
+    platforms.forEach(function(plat){
+        if(
+            playerX+frame_width > plat.x &&
+            playerX < plat.x + plat.width &&
+            playerY + frame_height >= plat.y &&
+            playerY + frame_height <= plat.y + plat.height + velocityY &&
+            velocityY >= 0
+        ){
+            playerY = plat.y - frame_height;
+            velocityY = 0;
+            isOnGround = true;
+        }
+    });
 
     if(playerY>=groundY){
         playerY = groundY;
