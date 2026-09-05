@@ -81,6 +81,9 @@ function updatePlayer(){
         isOnGround = false;
     }
 
+    if(playerX < 0) playerX = 0;
+    if(playerX + frame_width > canvas.width) playerX = canvas.width-frame_width;
+
     velocityY = velocityY +gravity;
     playerY = playerY + velocityY;
     isOnGround=false;
