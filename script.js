@@ -52,11 +52,18 @@ const platforms = [
     {x: 250, y: 150, width: 120, height:15},
 ]
 
-function drawPlatforms(){
-    platforms.forEach(function(plat){
-        c.fillStyle = '#4a6741';
-        c.fillRect(plat.x, plat.y, plat.width, plat.height);
-    })
+function drawPlatforms() {
+    platforms.forEach(function(plat, index) {
+        if (index === 0) {
+            c.fillStyle = '#2d5a1e';
+            c.fillRect(plat.x, plat.y, plat.width, plat.height);
+        } else {
+            c.fillStyle = '#5a3a1e';
+            c.fillRect(plat.x, plat.y, plat.width, plat.height);
+            c.fillStyle = '#7a5a3e';
+            c.fillRect(plat.x, plat.y, plat.width, 4);
+        }
+    });
 }
 
 window.addEventListener('keydown', function(e){
