@@ -110,6 +110,7 @@ function updatePlayer(){
 
     if(playerX < 0) playerX = 0;
     if(playerX + frame_width > canvas.width) playerX = canvas.width-frame_width;
+    if(playerY < 0) playerY = 0;
 
     velocityY = velocityY +gravity;
     playerY = playerY + velocityY;
