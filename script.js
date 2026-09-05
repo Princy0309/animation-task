@@ -10,8 +10,9 @@ function drawBackgroundColor(){
 
     const gradient = c.createLinearGradient(0, 0, 0, 350);
 
-    gradient.addColorStop(0, "darkblue");
-    gradient.addColorStop(1, "lightblue");
+    gradient.addColorStop(0, '#0f0c29');     
+    gradient.addColorStop(0.5, '#302b63');   
+    gradient.addColorStop(1, '#24243e');
 
     c.fillStyle = gradient;
 
@@ -162,12 +163,12 @@ function gameLoop(){
     c.drawImage(player, currentFrame*frame_width, 0, frame_width, frame_height, playerX, playerY, frame_width, frame_height);
 
     c.font = 'bold 18px Arial';
-c.fillStyle = 'white';
-c.fillText('Super Sprite Boy', 10, 25);
+    c.fillStyle = 'white';
+    c.fillText('Super Sprite Boy', 10, 25);
 
-c.font = '12px Arial';
-c.fillStyle = 'rgba(255,255,255,0.6)';
-c.fillText('Arrow keys to move, Up to jump', 10, 442);
+    c.font = '12px Arial';
+    c.fillStyle = 'rgba(255,255,255,0.6)';
+    c.fillText('Arrow keys to move, Up to jump', 10, 442);
 
     
 
