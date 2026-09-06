@@ -103,6 +103,7 @@ const coins = [
 
 
 let gameOver = false;
+let gameWon = false;
 const obstacles =[
     {x:300, y:365, width:20, height: 15, speed:1, minX:200, maxX:500},
     {x:420, y:205, width:20, height:15, speed:0.8, minX:400, maxX:510},
@@ -186,6 +187,10 @@ function checkCoinTouched(){
         if(distance < coin.size +20){
             coin.collected = true;
             score++;
+
+            if(score === coins.length){
+                gameWon = true;
+            }
         }
     })
 }
@@ -206,6 +211,19 @@ function drawPlatforms() {
 
 window.addEventListener('keydown', function(e){
     keys[e.key] = true;
+
+    if(e.key === 'r' && (gameOver || gameWon)){
+        playerX = 100;
+        playerY = 350;
+        isOnGround = true;
+        velocityY = 0;
+        score = 0; 
+        gameOver = false;
+        gameWon=false;
+        coins.forEach(function(coin){
+            coin.collected = false;
+        })
+    }
 });
 
 window.addEventListener('keyup', function(e){
@@ -279,11 +297,33 @@ function gameLoop(){
         c.fillStyle = 'white';
         c.fillText('Press R to Restart', canvas.width / 2, 250);
 
-        
+
         c.textAlign = 'start';
         requestAnimationFrame(gameLoop);
         return;
     }
+
+
+    if (gameWon) {
+    c.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+
+    c.font = 'bold 40px Arial';
+    c.fillStyle = '#FFD700';
+    c.textAlign = 'center';
+    c.fillText('YOU WIN!', canvas.width / 2, 200);
+
+    c.font = '20px Arial';
+    c.fillStyle = 'white';
+    c.fillText('You collected all the coins!', canvas.width / 2, 240);
+
+    c.fillText('Press R to Play Again', canvas.width / 2, 280);
+
+    c.textAlign = 'start';
+
+    requestAnimationFrame(gameLoop);
+    return;
+}
 
     updatePlayer();
 
