@@ -94,7 +94,7 @@ const platforms = [
 let score = 0;
 const coins = [
     {x:200, y:350, size: 10, collected: false},
-    {x:400, y:350, size:20, collected:false},
+    {x:400, y:350, size:10, collected:false},
     {x:600, y:350, size:10, collected:false},
     {x:190, y:260, size:10, collected:false},
     {x:440, y:190, size:10, collected:false},
