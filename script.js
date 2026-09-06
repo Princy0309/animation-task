@@ -89,6 +89,60 @@ const platforms = [
     {x: 250, y: 150, width: 120, height:15},
 ]
 
+
+
+let score = 0;
+const coins = [
+    {x:200, y:350, size: 10, collected: false},
+    {x:400, y:350, size:20, collected:false},
+    {x:600, y:350, size:10, collected:false},
+    {x:190, y:260, size:10, collected:false},
+    {x:440, y:190, size:10, collected:false},
+    {x:290, y:120, size:10, collected:false},
+]
+
+
+
+function drawCoins(){
+    coins.forEach(function(coin){
+        if(coin.collected) return;
+
+
+        c.fillStyle = '#FFD700';
+        c.beginPath();
+        c.arc(coin.x, coin.y, coin.size, 0, Math.PI*2);
+        c.fill();
+
+
+        c.fillStyle='#FFF8DC';
+        c.beginPath();
+        c.arc(coin.x-3, coin.y-3, coin.size/3, 0, Math.PI*2);
+        c.fill();
+    });
+}
+
+
+
+function checkCoinTouched(){
+    coins.forEach(function(coin){
+        if(coin.collected) return;
+
+
+        var playerCenterX = playerX + frame_width/2;
+        var playerCenterY = playerY + frame_height/2;
+
+        var dx = playerCenterX - coin.x;
+        var dy = playerCenterY - coin.y;
+
+        var distance = Math.sqrt(dx*dx + dy*dy);
+
+        if(distance < coin.size +20){
+            coin.collected = true;
+            score++;
+        }
+    })
+}
+
 function drawPlatforms() {
     platforms.forEach(function(plat, index) {
         if (index === 0) {
@@ -165,6 +219,9 @@ function gameLoop(){
 
     updatePlayer();
 
+    checkCoinTouched();
+    drawCoins();
+
     if(keys['ArrowRight'] || keys['ArrowLeft']){
 
          frameCounter++;
@@ -187,6 +244,10 @@ function gameLoop(){
     c.font = '12px Arial';
     c.fillStyle = 'rgba(255,255,255,0.6)';
     c.fillText('Arrow keys to move, Up to jump', 10, 442);
+
+    c.font = 'bold 20px Arial';
+   c.fillStyle = '#FFD700';
+   c.fillText('Coins: ' + score + ' / ' + coins.length, canvas.width - 150, 25);
 
     
 
