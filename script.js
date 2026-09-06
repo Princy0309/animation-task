@@ -109,7 +109,7 @@ const obstacles =[
 ]
 
 
-function drawObtacles(){
+function drawObtacle(){
     obstacles.forEach(function(obs){
         obs.x = obs.x + obs.speed;
         if(obs.x<=obs.minX || obs.x+obs.width > obs.maxX){
@@ -257,7 +257,7 @@ function gameLoop(){
     updatePlayer();
 
     checkCoinTouched();
-    drawObtacles();
+    drawObtacle();
     drawCoins();
 
     if(keys['ArrowRight'] || keys['ArrowLeft']){
