@@ -102,6 +102,43 @@ const coins = [
 ]
 
 
+let gameOver = false;
+const obstacles =[
+    {x:300, y:365, width:20, height: 15, speed:1, minX:200, maxX:500},
+    {x:420, y:205, width:20, height:15, speed:0.8, minX:400, maxX:510},
+]
+
+
+function drawObtacles(){
+    obstacles.forEach(function(obs){
+        obs.x = obs.x + obs.speed;
+        if(obs.x<=obs.minX || obs.x+obs.width > obs.maxX){
+            obs.speed = -obs.speed;
+        } 
+
+
+        c.fillStyle = '#44cc44';
+        c.beginPath();
+        c.arc(obs.x+10, obs.y+5, 12, Math.PI, 0);
+        c.fillRect(obs.x-2, obs.y+5, 24, 10);
+        c.fill();
+
+        c.fillStyle = 'white';
+        c.beginPath();
+        c.arc(obs.x + 5, obs.y + 2, 4, 0, Math.PI * 2);
+        c.arc(obs.x + 15, obs.y + 2, 4, 0, Math.PI * 2);
+        c.fill();
+
+
+        c.fillStyle = 'black';
+        c.beginPath();
+        c.arc(obs.x + 6, obs.y + 3, 2, 0, Math.PI * 2);
+        c.arc(obs.x + 16, obs.y + 3, 2, 0, Math.PI * 2);
+        c.fill();
+    })
+}
+
+
 
 function drawCoins(){
     coins.forEach(function(coin){
@@ -220,6 +257,7 @@ function gameLoop(){
     updatePlayer();
 
     checkCoinTouched();
+    drawObtacles();
     drawCoins();
 
     if(keys['ArrowRight'] || keys['ArrowLeft']){
