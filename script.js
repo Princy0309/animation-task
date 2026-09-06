@@ -135,6 +135,16 @@ function drawObtacle(){
         c.arc(obs.x + 6, obs.y + 3, 2, 0, Math.PI * 2);
         c.arc(obs.x + 16, obs.y + 3, 2, 0, Math.PI * 2);
         c.fill();
+
+        if(
+            playerX + frame_width > obs.x-2 &&
+            playerX < obs.x+22 && 
+            playerY + frame_height > obs.y-7 &&
+            playerY<obs.y+15
+        ){
+            gameOver = true;
+
+        }
     })
 }
 
@@ -253,6 +263,27 @@ function gameLoop(){
     drawClouds();
 
     drawPlatforms();
+
+
+    if (gameOver) {
+        c.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        c.fillRect(0, 0, canvas.width, canvas.height);
+
+        c.font = 'bold 40px Arial';
+        c.fillStyle = '#e94560';
+        c.textAlign = 'center';
+        c.fillText('GAME OVER', canvas.width / 2, 200);
+
+
+        c.font = '20px Arial';
+        c.fillStyle = 'white';
+        c.fillText('Press R to Restart', canvas.width / 2, 250);
+
+        
+        c.textAlign = 'start';
+        requestAnimationFrame(gameLoop);
+        return;
+    }
 
     updatePlayer();
 
